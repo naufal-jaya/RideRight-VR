@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ef481ccb8a3c66e67b360c6d6027b9f3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - skyBubulak: {fileID: 2100000, guid: 9da66746c676a1552a6492851eaa2024, type: 2}
+  - skyBus: {fileID: 2100000, guid: a91ab2d1b627ae568a146a502fc7b6d7, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
