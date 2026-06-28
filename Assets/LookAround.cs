@@ -50,6 +50,13 @@ public class CameraLook : MonoBehaviour
         }
     }
 
+    public void SetInitialRotation(Vector3 rotation)
+    {
+        rotationX = rotation.x;
+        rotationY = rotation.y;
+        transform.localEulerAngles = new Vector3(rotationX, rotationY, 0f);
+    }
+
     void HandleTouch()
     {
         if (Input.touchCount == 1)

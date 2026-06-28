@@ -13,6 +13,7 @@ public class SceneFlow : MonoBehaviour
 
     [Header("Skyboxes")]
     public Material terminalSkybox;
+    public Material homeSkybox;
     public Material busSkybox;
     public Material stationSkyBox;
 
@@ -23,6 +24,14 @@ public class SceneFlow : MonoBehaviour
     [Header("Settings")]
     public float busRideDuration = 30f;
 
+    [Header("Auto Rotate")]
+    public AutoRotate autoRotate;
+
+    [Header("Camera Start Rotations")]
+    public Vector3 terminalRotation = new Vector3(72, 72, 0);
+    public Vector3 busRotation = new Vector3(0, 0, 0);
+    public Vector3 stationRotation = new Vector3(0, 0, 0);
+
     void Start()
     {
         ShowHome();
@@ -32,9 +41,9 @@ public class SceneFlow : MonoBehaviour
     {
         SetAll(false);
         homeScreen.SetActive(true);
-        RenderSettings.skybox = null;
-        terminalHotspots.SetActive(false);
-        busHotspots.SetActive(false);
+        RenderSettings.skybox = homeSkybox;
+        autoRotate.StartRotating();
+        Camera.main.GetComponent<CameraLook>().enabled = false;
     }
 
     public void ShowTerminal()
@@ -42,8 +51,11 @@ public class SceneFlow : MonoBehaviour
         SetAll(false);
         terminalScreen.SetActive(true);
         RenderSettings.skybox = terminalSkybox;
+        autoRotate.StopRotating(); 
         terminalHotspots.SetActive(true);
         busHotspots.SetActive(false);
+        Camera.main.GetComponent<CameraLook>().enabled = true;
+        Camera.main.GetComponent<CameraLook>().SetInitialRotation(terminalRotation);
     }
 
     public void ShowCardTap()
@@ -62,13 +74,7 @@ public class SceneFlow : MonoBehaviour
         RenderSettings.skybox = busSkybox;
         busHotspots.SetActive(true);
         terminalHotspots.SetActive(false);
-        StartCoroutine(BusTimer());
-    }
-
-    IEnumerator BusTimer()
-    {
-        yield return new WaitForSeconds(busRideDuration);
-        ShowStation();
+        GetComponent<BusRoute>().StartRoute(); 
     }
 
     public void ShowStation()
