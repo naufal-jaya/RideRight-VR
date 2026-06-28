@@ -23,9 +23,14 @@ public class CameraLook : MonoBehaviour
     }
 
     void Update()
+{
+    if (Input.GetMouseButtonDown(0))
     {
-        HandleMouseDrag();
-        HandleTouch();
+        Debug.Log("Clicked: " + UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject);
+    }
+    
+    HandleMouseDrag();
+    HandleTouch();
     }
 
     void HandleMouseDrag()
